@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action="{{ url_for('main') }}" method="POST">
+    <fieldset>
+        <legend>Input values:</legend>
+        feature_6  (0.0 - 1.0):
+        <input name="feature_6" type="float" value="0.5" required>
+        <br>
+        <br> feature_46 (-0.5 - 1.0):
+        <input name="feature_46" type="float" value="0" required>
+        <br><br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+    {% if result %}
+        <br> 
+           <p style="font-size:1em">{{ result.class }}</p>
+           <p>Class1 probability: {{ result.predict_proba }}</p>
+           
+    {% endif %}
+</div>
+</body>
+</html>
