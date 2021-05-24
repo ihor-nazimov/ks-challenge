@@ -2,12 +2,17 @@
 #https://medium.com/analytics-vidhya/deploying-a-machine-learning-model-as-a-flask-app-on-heroku-part-1-b5e194fed16d
 
 import os
+import tempfile
+
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 import pandas as pd
 import pickle
 
-UPLOAD_FOLDER = '/tmp/flask'
+
+# UPLOAD_FOLDER = '/tmp/flask'
+UPLOAD_FOLDER = tempfile.TemporaryDirectory().name
+os.mkdir(UPLOAD_FOLDER)
 ALLOWED_EXTENSIONS = {'json'}
 
 app = Flask(__name__)
@@ -55,7 +60,9 @@ def main():
         # prediction = prediction + "(prediction_proba = " + prediction_proba + ")"
 
         return render_template('main.html', 
-            result={"class":prediction, "prediction_proba":prediction_proba})
+            result={"class":prediction, 
+                "prediction_proba": "{:.3f}".format(prediction_proba)}
+        )
 
 
 def allowed_file(filename):
