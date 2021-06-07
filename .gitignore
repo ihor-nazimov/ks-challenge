@@ -5,4 +5,4 @@
 /target/scala-2.12/classes/
 *-checkpoint.ipynb
 *.json
-*.pkl
+#*.pkl
